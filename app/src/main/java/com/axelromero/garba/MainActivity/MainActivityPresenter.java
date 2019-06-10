@@ -1,32 +1,32 @@
 package com.axelromero.garba.MainActivity;
 
+import android.app.Application;
 import android.content.Context;
+import com.axelromero.garba.AxelGarbaApplication;
 import com.axelromero.garba.GarbaApiCallInterface;
-import com.axelromero.garba.R;
 import com.axelromero.garba.models.GarbaItemListModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+import javax.inject.Inject;
 
 public class MainActivityPresenter {
 
     MainActivityInteractor interactor;
-    GarbaItemListModel garbaItemListModel = new GarbaItemListModel();
 
-    public MainActivityPresenter(MainActivityInteractor interactor) {
+    @Inject
+    Retrofit retrofitService;
+
+    public MainActivityPresenter(MainActivityInteractor interactor, Application application) {
         this.interactor = interactor;
+        ((AxelGarbaApplication) application).getDataComponent().inject(this);
     }
 
     public void getProducts(Context context) {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(context.getString(R.string.base_url))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        GarbaApiCallInterface service = retrofit.create(GarbaApiCallInterface.class);
+        GarbaApiCallInterface service = retrofitService.create(GarbaApiCallInterface.class);
 
         Call<GarbaItemListModel> call = service.getProducts();
 

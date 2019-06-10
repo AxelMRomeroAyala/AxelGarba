@@ -44,7 +44,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         setContentView(R.layout.activity_product_detail);
         supportPostponeEnterTransition();
         setUpViews();
-        productDetailPresenter = new ProductDetailPresenter(this);
+        productDetailPresenter = new ProductDetailPresenter(this, getApplication());
 
         Bundle extras = getIntent().getExtras();
         productId = extras.getString(MainActivity.EXTRA_PRODUCT_ID);
@@ -94,12 +94,18 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onProductDetailLoaded(final GarbaItemDetailModel model) {
+
         title.setText(model.description);
         price.setText(Utils.formatAsPrice(model.price));
         oldPrice.setText(Utils.formatAsPrice(model.listPrice));
         discount.setText(Utils.formatAsDiscountPercentage(model.discount));
 
         oldPrice.setPaintFlags(oldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        if (model.discount == 0) {
+            oldPrice.setVisibility(View.GONE);
+            discount.setVisibility(View.GONE);
+        }
+
 
         productImageView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
 
         recyclerView= findViewById(R.id.recycler_view);
 
-        presenter = new MainActivityPresenter(this);
+        presenter = new MainActivityPresenter(this, getApplication());
         presenter.getProducts(getBaseContext());
     }
 

@@ -7,7 +7,6 @@ import java.util.Locale;
 
 public class Utils {
 
-
     public static String formatAsPrice(int value){
         String price= String.valueOf(value);
         if(price.length()>3){
