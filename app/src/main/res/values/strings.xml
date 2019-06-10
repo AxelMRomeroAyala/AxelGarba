@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AxelGarba</string>
+    <string name="base_url">http://garbarino-mock-api.s3-website-us-east-1.amazonaws.com</string>
+
+    <string name="product_opinions">OPINIONES DEL PRODUCTO</string>
+    <string name="product_av_opinion_from">Promedio entre %1$s opiniones</string>
+    <string name="product_view_all">Ver todas las opiniones</string>
+
+    <string name="review_author">Por</string>
+
 </resources>
